@@ -1,9 +1,7 @@
 from random import seed, choice
 from datetime import datetime
-import hashlib
-import time
-
 from binary_tree2 import Tree, Node
+import time
 
 
 def genstring(n = 10):
@@ -11,7 +9,6 @@ def genstring(n = 10):
     return "".join(a)
 
 
-#seed(1)
 seed(datetime.now())
 hash_tree = Tree()
 data = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\()*+,-./:;<=>?@[\\]^_`{|}~' + "'"
@@ -23,38 +20,30 @@ with open('strings.txt', 'w') as f:
         output = genstring(40)
         outhash = hash(output) % 10**8
         temp_hash_tree.append(outhash)
-        f.write("{} - {}\n".format(output, outhash))
+        f.write(f"{output} - {outhash}\n")
 
     hash_tree.root = Node(temp_hash_tree[0], offset = 1)
     temp_hash_tree.pop(0)
 
     for i in range(len(temp_hash_tree)):
         hash_tree.add(temp_hash_tree[i], off = i + 2)
-        f.write("{}\n".format(temp_hash_tree[i]))
-
-
-print("{} - его оффсет = {}".format(hash_tree.root.value, hash_tree.root.offset))
-print("{} - его оффсет = {}".format(hash_tree.root.left.value, hash_tree.root.left.offset))
-print("{} - его оффсет = {}".format(hash_tree.root.right.value, hash_tree.root.right.offset))
-print()
+        #f.write("{}\n".format(temp_hash_tree[i]))
 
 
 sf = []
-for i in range(100):
+for i in range(2000):
     sf.append(choice(temp_hash_tree))
-
-
 print("Будем искать следующие хеши: ", sf)
 
 
-print("Поиск по дереву:")
+# поиск по дереву
 start = time.process_time()
 for i in range(len(sf)):
-    print(hash_tree.search(root = hash_tree.root, key = sf[i]))
+    hash_tree.search(root = hash_tree.root, key = sf[i])
 print("На поиск данных хешей в бинарном дереве ушло: ", time.process_time() - start)
 
 
-print("Поиск по файлу:")
+# поиск в файле напрямую
 f = open('strings.txt').readlines()
 start2 = time.process_time()
 for i in range(len(sf)):
