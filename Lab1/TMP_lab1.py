@@ -96,26 +96,7 @@ if __name__ == "__main__":
   # медианная диапазона
   randint_spacecalc = median([abs(i) for i in range(randint_lower, randint_upper)])
 
-  # 1 -4 8 3 0 4 10 -5
-  tree.add(1)
-  tree.add(-4)
-  tree.add(8)
-  tree.add(3)
-  tree.add(0)
-  tree.add(4)
-  tree.add(10)
-  tree.add(-5)
-
-  tree.add(11)
-  tree.add(12)
-  tree.add(13)
-  tree.add(14)
-  tree.add(15)
-  tree.add(16)
-  tree.add(17)
-  
-
-  """ for i in range(2**layerc - 1):
-    tree.add(randint(randint_lower, randint_upper)) """
+  for i in range(2**layerc - 1):
+    tree.add(randint(randint_lower, randint_upper))
 
   tree.printw_queue(layerc)
